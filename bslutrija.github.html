@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="sr">
+<!--| BS - Lutrija (Projekat Balkan School-a 2022.) /// Web Dizajner: Neca /// Ideja i realizacija: Neca |-->
+<head>
+	<!-----| META TAGOVI, TAB |----->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="shortcut icon" type="image/png" href="favicons/9119-png-slike-bs-logo.png">
+	<title>Balkan School - Lutrija</title>
+	<!--| CSS LINK |-->
+	<link rel="stylesheet" type="text/css" href="css/bslutrija.github.io-style.css">
+	<!--| W3SCHOOL ICON CODE |-->
+	<script src="js/3e368e797c.js" crossorigin="anonymous"></script>
+</head>
+
+<!-----| HTML & JAVASCRIPT |----->
+
+	<body onload="toggleAudio()">
+
+	<main id="Okvir">
+		<section id="status">
+			<img src="">
+		</section>
+		<section id="Slots">
+			<div id="slot1" class="alogo"></div>
+			<div id="slot2" class="alogo"></div>
+			<div id="slot3" class="alogo"></div>
+			<div id="slot4" class="alogo"></div>
+			<div id="slot5" class="alogo"></div>
+			<div id="slot6" class="alogo"></div>
+			<div id="slot7" class="alogo"></div>
+		</section>
+		
+		<section onclick="doSlot()" id="SpinDugme">Zapo&#269;ni izvla&#269;enje</section>
+		<section onclick="" id="ResetDugme"><i class="fas fa-sync-alt"></i> Resetuj kartice</section>
+		<p class="SpinDugmeDole">* Pre narednog izvla&#269;enja resetujte kartice klikom na dugme <strong>"Resetuj kartice"</strong> nakon &scaron;to se prethodno izvla&#269;enje zavr&scaron;i.</p>
+
+		<section id="options" onclick="toggleAudio()">
+			<img src="images/png-slike-audioOn.png" id="audio">
+			<p id="zvuktext" class="optiontext"></p>
+		</section>
+
+		<div class="footer">
+			<p><strong>&copy; BS Lutrija - Powered by: Balkan School | 2022.</strong></p>
+			<p>Organizator: Djordjevi&#263; || Designed by: Djordjevi&#263;</p>
+		</div>
+	</main>
+
+	<script>
+	var doing = false;
+	var spin = [new Audio("zvukovi-mp3/spin.mp3"),new Audio("zvukovi-mp3/spin.mp3"),new Audio("zvukovi-mp3/spin.mp3"),new Audio("zvukovi-mp3/spin.mp3"),new Audio("zvukovi-mp3/spin.mp3"),new Audio("zvukovi-mp3/spin.mp3"),new Audio("zvukovi-mp3/spin.mp3")];
+	var coin = [new Audio("zvukovi-mp3/coin.mp3"),new Audio("zvukovi-mp3/coin.mp3"),new Audio("zvukovi-mp3/coin.mp3"),new Audio("zvukovi-mp3/coin.mp3"),new Audio("zvukovi-mp3/coin.mp3"),new Audio("zvukovi-mp3/coin.mp3"),new Audio("zvukovi-mp3/coin.mp3")];
+	var win = new Audio("zvukovi-mp3/win.mp3");
+	var lose = new Audio("zvukovi-mp3/lose.mp3");
+	var audio = false;
+
+	function doSlot(){
+		if (doing){return null;}
+		doing = true;
+
+		SpinDugme.onclick = null;
+		SpinDugme.style.animation = "none";
+		SpinDugme.style.filter = "brightness(70%)";
+		SpinDugme.style.cursor = "not-allowed";
+		SpinDugme.innerHTML = "Izvla&#269;enje u toku, molimo sa&#269;ekajte...";
+
+		var numChanges = randomInt(1,4)*7
+		var numeberSlot1 = numChanges+randomInt(1,7)
+		var numeberSlot2 = numChanges+2*7+randomInt(1,7)
+		var numeberSlot3 = numChanges+4*7+randomInt(1,7)
+		var numeberSlot4 = numChanges+6*7+randomInt(1,7)
+		var numeberSlot5 = numChanges+8*7+randomInt(1,7)
+		var numeberSlot6 = numChanges+10*7+randomInt(1,7)
+		var numeberSlot7 = numChanges+12*7+randomInt(1,7)
+
+		var i1 = 0;
+		var i2 = 0;
+		var i3 = 0;
+		var i4 = 0;
+		var i5 = 0;
+		var i6 = 0;
+		var i7 = 0;
+		var sound = 0
+
+		slot1 = setInterval(spin1, 150);
+		slot2 = setInterval(spin2, 150);
+		slot3 = setInterval(spin3, 150);
+		slot4 = setInterval(spin4, 150);
+		slot5 = setInterval(spin5, 150);
+		slot6 = setInterval(spin6, 150);
+		slot7 = setInterval(spin7, 150);
+
+		function spin1(){
+			i1++;
+			if (i1>=numeberSlot1){
+				coin[0].play()
+				clearInterval(slot1);
+				return null;
+			}
+			slotTile = document.getElementById("slot1");
+			if (slotTile.className=="alogo"){
+				slotTile.className = "a0";
+			}
+			if (slotTile.className=="a29"){
+				slotTile.className = "a0";
+			}
+			slotTile.className = "a"+(parseInt(slotTile.className.substring(1))+1)
+		}
+		function spin2(){
+			i2++;
+			if (i2>=numeberSlot2){
+				coin[1].play()
+				clearInterval(slot2);
+				return null;
+			}
+			slotTile = document.getElementById("slot2");
+			if (slotTile.className=="alogo"){
+				slotTile.className = "a0";
+			}
+			if (slotTile.className=="a29"){
+				slotTile.className = "a0";
+			}
+			slotTile.className = "a"+(parseInt(slotTile.className.substring(1))+1)
+		}
+		function spin3(){
+			i3++;
+			if (i3>=numeberSlot3){
+				coin[1].play()
+				clearInterval(slot3);
+				return null;
+			}
+			slotTile = document.getElementById("slot3");
+			if (slotTile.className=="alogo"){
+				slotTile.className = "a0";
+			}
+			if (slotTile.className=="a29"){
+				slotTile.className = "a0";
+			}
+			slotTile.className = "a"+(parseInt(slotTile.className.substring(1))+1)
+		}
+		function spin4(){
+			i4++;
+			if (i4>=numeberSlot4){
+				coin[1].play()
+				clearInterval(slot4);
+				return null;
+			}
+			slotTile = document.getElementById("slot4");
+			if (slotTile.className=="alogo"){
+				slotTile.className = "a0";
+			}
+			if (slotTile.className=="a29"){
+				slotTile.className = "a0";
+			}
+			slotTile.className = "a"+(parseInt(slotTile.className.substring(1))+1)
+		}
+		function spin5(){
+			i5++;
+			if (i5>=numeberSlot5){
+				coin[1].play()
+				clearInterval(slot5);
+				return null;
+			}
+			slotTile = document.getElementById("slot5");
+			if (slotTile.className=="alogo"){
+				slotTile.className = "a0";
+			}
+			if (slotTile.className=="a29"){
+				slotTile.className = "a0";
+			}
+			slotTile.className = "a"+(parseInt(slotTile.className.substring(1))+1)
+		}
+		function spin6(){
+			i6++;
+			if (i6>=numeberSlot6){
+				coin[1].play()
+				clearInterval(slot6);
+				return null;
+			}
+			slotTile = document.getElementById("slot6");
+			if (slotTile.className=="alogo"){
+				slotTile.className = "a0";
+			}
+			if (slotTile.className=="a29"){
+				slotTile.className = "a0";
+			}
+			slotTile.className = "a"+(parseInt(slotTile.className.substring(1))+1)
+		}
+		function spin7(){
+			i7++;
+			if (i7>=numeberSlot7){
+				coin[1].play()
+				clearInterval(slot7);
+				doing = false;
+				dupliBroj();
+			}
+			slotTile = document.getElementById("slot7");
+			if (slotTile.className=="alogo"){
+				slotTile.className = "a0";
+			}
+			if (slotTile.className=="a29"){
+				slotTile.className = "a0";
+			}
+			sound++;
+			if (sound==spin.length){
+				sound=0;
+			}
+			spin[sound].play();
+			slotTile.className = "a"+(parseInt(slotTile.className.substring(1))+1)
+		}
+	}
+
+	function resetSpin() {
+		if (doing){return null;}
+		doing = false;
+
+		lose.play();
+
+		document.getElementById("slot1").className = "alogo";
+		document.getElementById("slot2").className = "alogo";
+		document.getElementById("slot3").className = "alogo";
+		document.getElementById("slot4").className = "alogo";
+		document.getElementById("slot5").className = "alogo";
+		document.getElementById("slot6").className = "alogo";
+		document.getElementById("slot7").className = "alogo";
+
+		Okvir.style.boxShadow = "none";
+		Slots.style.borderColor = "rgba(255, 255, 255, .4)";
+
+		ResetDugme.onclick = null;
+		ResetDugme.style.cursor = "not-allowed";
+		ResetDugme.style.backgroundColor = "transparent";
+		ResetDugme.style.border = "1px dashed #C62828";
+
+		SpinDugme.onclick = function() {doSlot()};
+		SpinDugme.style.backgroundColor = "#008b25";
+		SpinDugme.style.animation = "blinkikng 1.5s infinite";
+		SpinDugme.style.filter = "brightness(100%)";
+		SpinDugme.style.border = "1px solid #008b25";
+		SpinDugme.style.cursor = "pointer";
+		SpinDugme.innerHTML = "Zapo&#269;ni novo izvla&#269;enje";
+	}
+
+	function dupliBroj() {
+		var slot1 = document.getElementById("slot1").className
+		var slot2 = document.getElementById("slot2").className
+		var slot3 = document.getElementById("slot3").className
+		var slot4 = document.getElementById("slot4").className
+		var slot5 = document.getElementById("slot5").className
+		var slot6 = document.getElementById("slot6").className
+		var slot7 = document.getElementById("slot7").className
+
+		SpinDugme.style.backgroundColor = "transparent";
+		SpinDugme.style.border = "1px dashed rgba(255, 255, 255, .4)";
+		SpinDugme.style.animation = "none";
+		SpinDugme.style.filter = "brightness(100%)";
+		SpinDugme.style.cursor = "not-allowed";
+		SpinDugme.innerHTML = "Izvu&#269;ena su 7 razli&#269;ita broja! (1-29)";
+
+		ResetDugme.onclick = function() {resetSpin()};
+		ResetDugme.style.cursor = "pointer";
+		ResetDugme.style.backgroundColor = "#C62828";
+		ResetDugme.style.border = "1px solid #C62828";
+
+		Okvir.style.boxShadow = "0 0 20px #008b25";
+		Slots.style.borderColor = "#008b25";
+		win.volume = 1;
+		win.play();
+
+		if ((slot1 == slot2) || (slot1 == slot3) || (slot1 == slot4) || (slot1 == slot5) || (slot1 == slot6) || (slot1 == slot7) ||
+			(slot2 == slot1) || (slot2 == slot3) || (slot2 == slot4) || (slot2 == slot5) || (slot2 == slot6) || (slot2 == slot7) ||
+			(slot3 == slot2) || (slot3 == slot4) || (slot3 == slot5) || (slot3 == slot6) || (slot3 == slot7) ||
+			(slot4 == slot3) || (slot4 == slot5) || (slot4 == slot6) || (slot4 == slot7) ||
+			(slot5 == slot4) || (slot5 == slot6) || (slot5 == slot7)
+			(slot6 == slot5) || (slot6 == slot7))
+		{
+			win.volume = 0;
+			lose.play();
+			doSlot();
+			SpinDugme.style.backgroundColor = "#ff9900";
+			SpinDugme.style.animation = "none";
+			SpinDugme.style.filter = "brightness(70%)";
+			SpinDugme.style.cursor = "not-allowed";
+			SpinDugme.style.border = "1px solid #ff9900";
+			SpinDugme.innerHTML = "Izvu&#269;eno je vi&scaron;e istih brojeva, ponavljam izvla&#269;enje...";
+
+			ResetDugme.onclick = null;
+			ResetDugme.style.cursor = "not-allowed";
+			ResetDugme.style.backgroundColor = "transparent";
+			ResetDugme.style.border = "1px dashed #C62828";
+
+			Okvir.style.boxShadow = "none";
+			Slots.style.borderColor = "rgba(255, 255, 255, .4)";
+		}
+	}
+
+	function toggleAudio(){
+		if (!audio){
+			zvuktext.innerHTML = "Zvuk uklju&#269;en"
+			options.style.backgroundColor = "#3399ff"
+			audio = !audio;
+			for (var x of spin){
+				x.volume = 0.06;	//zvuk okretanja
+			}
+			for (var x of coin){
+				x.volume = 0.07;	//zvuk kada stane okretanje "beep"
+			}
+			win.volume = 0.4;
+			lose.volume = 0.2;
+		}else{
+			zvuktext.innerHTML = "Zvuk isklju&#269;en"
+			options.style.backgroundColor = "#C62828"
+			audio = !audio;
+			for (var x of spin){
+				x.volume = 0;
+			}
+			for (var x of coin){
+				x.volume = 0;
+			}
+			win.volume = 0;
+			lose.volume = 0;
+		}
+		document.getElementById("audio").src = "png-slike/audio"+(audio?"On":"Off")+".png";
+	}
+
+	function randomInt(min, max){
+		return Math.floor((Math.random() * (max-min+1)) + min);
+	}
+	</script>
+	
+</body></html>
